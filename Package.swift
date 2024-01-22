@@ -5,19 +5,29 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftFastText",
+    platforms: [.macOS(.v11)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SwiftFastText",
-            targets: ["SwiftFastText"]),
+            targets: ["ObjCFastText", "SwiftFastText"]
+        ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftFastText"),
-        .testTarget(
-            name: "SwiftFastTextTests",
-            dependencies: ["SwiftFastText"]),
-    ]
+            name: "ObjCFastText",
+            path: "Sources/ObjC",
+            cxxSettings: [
+                .headerSearchPath("../fastText/")
+            ]
+        ),
+        .target(
+            name: "SwiftFastText",
+            dependencies: ["ObjCFastText"],
+            path: "Sources/Swift"
+        )
+    ],
+    cxxLanguageStandard: .cxx11
 )
