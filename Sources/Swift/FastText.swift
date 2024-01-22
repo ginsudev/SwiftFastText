@@ -8,17 +8,16 @@
 import Foundation
 @_exported import ObjCFastText
 
-final class FastText {
+public final class FastText {
     private let wrapper: FastTextWrapper
     
-    init(modelPath: URL) {
+    public init(modelPath: URL) {
         self.wrapper = .init(model: modelPath)
     }
     
-    func nearbyWords(word: String) -> [String] {
-        var arr = NSMutableArray()
+    public func nearbyWords(word: String) -> [String] {
+        let arr = NSMutableArray()
         wrapper.nearbyWords(arr, forWord: word)
-        
-        return [""]
+        return arr as? [String] ?? []
     }
 }
