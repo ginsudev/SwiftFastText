@@ -12,7 +12,7 @@
 
 #include <stdio.h>
 
-#include "../../fastText/fasttext.h"
+#include "../cppFastText/fasttext.h"
 #include <vector>
 #include <string>
 
