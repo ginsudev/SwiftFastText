@@ -26,7 +26,10 @@ let package = Package(
         .target(
             name: "SwiftFastText",
             dependencies: ["ObjCFastText"],
-            path: "Sources/Swift"
+            path: "Sources/Swift",
+            cxxSettings: [
+                .headerSearchPath("../fastText/")
+            ]
         )
     ],
     cxxLanguageStandard: .cxx17
