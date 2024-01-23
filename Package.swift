@@ -21,12 +21,18 @@ let package = Package(
             path: "Sources/ObjC",
             cxxSettings: [
                 .headerSearchPath("../fastText/")
+            ],
+            linkerSettings: [
+                .linkedLibrary("c++")
             ]
         ),
         .target(
             name: "SwiftFastText",
             dependencies: ["ObjCFastText"],
-            path: "Sources/Swift"
+            path: "Sources/Swift",
+            linkerSettings: [
+                .linkedLibrary("c++")
+            ]
         )
     ],
     cxxLanguageStandard: .cxx11
