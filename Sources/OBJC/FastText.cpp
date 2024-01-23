@@ -5,6 +5,8 @@
 //  Created by Noah Little on 22/1/2024.
 //
 
+#ifdef __cplusplus
+
 #include <stdio.h>
 #include "include/FastText.h"
 
@@ -23,3 +25,5 @@ void fasttextGetNearByWords(const char* word,
                             std::vector<std::pair<real, std::string>> &nearestNeighbours) {
     nearestNeighbours = fastTextMain->getNN(word, 10);
 }
+
+#endif
