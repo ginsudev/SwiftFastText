@@ -15,9 +15,9 @@ public final class FastText {
         self.wrapper = .init(model: modelPath)
     }
     
-    public func nearbyWords(word: String) -> [String] {
+    public func nearbyWords(word: String) -> [FastTextResult] {
         let arr = NSMutableArray()
         wrapper.nearbyWords(arr, forWord: word)
-        return arr as? [String] ?? []
+        return arr as? [FastTextResult] ?? []
     }
 }

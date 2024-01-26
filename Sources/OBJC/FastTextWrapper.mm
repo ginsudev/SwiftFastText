@@ -7,6 +7,8 @@
 
 #include "include/FastTextWrapper.h"
 
+# pragma mark - FastTextWrapper
+
 @implementation FastTextWrapper
 
 - (instancetype)initWithModel:(NSURL *)modelPath {
@@ -30,9 +32,26 @@
     [words removeAllObjects];
     
     std::for_each(neighbours.begin(), neighbours.end(), [&words](std::pair<fasttext::real, std::string> pair) {
-        id nsstr = [NSString stringWithUTF8String:pair.second.c_str()];
-        [words addObject:nsstr];
+        id word = [NSString stringWithUTF8String:pair.second.c_str()];
+        float distance = pair.first;
+        FastTextResult *result = [[FastTextResult alloc] initWithWord:word distance:distance];
+        [words addObject:result];
     });
+}
+
+@end
+
+# pragma mark - FastTextResult
+
+@implementation FastTextResult
+
+- (instancetype)initWithWord:(NSString *)word distance:(float)distance {
+    self = [super init];
+    if (self) {
+        _word = word;
+        _distance = distance;
+    }
+    return self;
 }
 
 @end
